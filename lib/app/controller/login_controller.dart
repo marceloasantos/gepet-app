@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gepet_app/app/model/usuario_model.dart';
 import 'package:gepet_app/app/repository/login_repository.dart';
+import 'package:gepet_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,8 @@ class LoginController extends GetxController {
       var usuario = UsuarioModel.fromJson(value?.data);
       prefs.setString("token", usuario.token!);
       prefs.setString("autorizacao", usuario.autorizacao!);
+
+      Get.toNamed(Routes.MANAGEMENT);
     });
   }
 }

@@ -16,7 +16,7 @@ class BaseRepository {
       var result = await dio.get(
         '${Constants.API_URL}$endpoint',
         queryParameters: parameters,
-        options: requiresToken && !prefs.containsKey("token")
+        options: !requiresToken
             ? null
             : Options(
                 headers: {
@@ -44,13 +44,11 @@ class BaseRepository {
         '${Constants.API_URL}$endpoint',
         queryParameters: query,
         data: body,
-        options: requiresToken
+        options: !requiresToken
             ? null
-            : Options(
-                headers: !prefs.containsKey("token")
-                    ? {'Authorization': "Bearer $authorization"}
-                    : null,
-              ),
+            : Options(headers: {
+                'Authorization': "Bearer $authorization",
+              }),
       );
 
       return result;
@@ -68,7 +66,7 @@ class BaseRepository {
       var result = await dio.put(
         '${Constants.API_URL}$endpoint',
         data: body,
-        options: requiresToken && !prefs.containsKey("token")
+        options: !requiresToken
             ? null
             : Options(
                 headers: {
@@ -92,7 +90,7 @@ class BaseRepository {
       var result = await dio.delete(
         '${Constants.API_URL}$endpoint',
         queryParameters: query,
-        options: requiresToken && !prefs.containsKey("token")
+        options: !requiresToken
             ? null
             : Options(
                 headers: {'Authorization': "Bearer $authorization"},

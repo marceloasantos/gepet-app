@@ -19,6 +19,7 @@ dependencies:
   oktoast: ^3.0.0
   dio: ^4.0.0
   uuid: ^3.0.4
+  flutter_spinkit: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +30,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/icons/
+  fonts:
+    - family: NotoEmoji
+      fonts:
+        - asset: assets/fonts/NotoEmoji.ttf

@@ -1,7 +1,7 @@
 import 'package:gepet_app/app/bindings/login_binding.dart';
 import 'package:gepet_app/app/bindings/management_binding.dart';
-import 'package:gepet_app/app/page/login_page.dart';
-import 'package:gepet_app/app/page/management_page.dart';
+import 'package:gepet_app/app/page/login/login_page.dart';
+import 'package:gepet_app/app/page/management/management_page.dart';
 import 'package:get/get.dart';
 part './app_routes.dart';
 

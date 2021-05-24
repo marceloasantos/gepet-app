@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 import 'animal_model.dart';
 
 class UsuarioModel {
@@ -10,16 +8,16 @@ class UsuarioModel {
     this.senha,
     this.autorizacao,
     this.token,
-    // this.animais,
+    this.animais,
   });
 
-  Uuid? id;
+  String? id;
   String? nome;
   String? email;
   String? senha;
   String? autorizacao;
   String? token;
-  // List<AnimalModel>? animais;
+  List<AnimalModel>? animais;
 
   factory UsuarioModel.fromJson(Map<String, dynamic> json) => UsuarioModel(
         id: json["id"],
@@ -28,8 +26,13 @@ class UsuarioModel {
         senha: json["senha"],
         autorizacao: json["autorizacao"],
         token: json["token"],
-        // animais: List<AnimalModel>.from(
-        //     json["animais"]!.map((x) => AnimalModel.fromJson(x))),
+        animais: null != json["animais"]
+            ? List<AnimalModel>.from(
+                json["animais"].map(
+                  (x) => AnimalModel.fromJson(x),
+                ),
+              )
+            : [],
       );
 
   Map<String, dynamic> toJson() => {

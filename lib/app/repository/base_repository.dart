@@ -20,7 +20,7 @@ class BaseRepository {
             ? null
             : Options(
                 headers: {
-                  'Autorizacao': "Bearer $authorization",
+                  'Authorization': "Bearer $authorization",
                 },
               ),
       );

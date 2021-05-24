@@ -5,7 +5,7 @@ import 'package:gepet_app/app/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 
-import 'app/page/login_page.dart';
+import 'app/page/login/login_page.dart';
 
 void main() async {
   runApp(MyApp());

@@ -14,9 +14,10 @@ class AnimalModel {
   factory AnimalModel.fromJson(Map<String, dynamic> json) => AnimalModel(
         id: json["id"],
         nome: json["nome"],
-        peso: json["peso"].toDouble(),
-        vacinas:
-            List<Vacina>.from(json["vacinas"].map((x) => Vacina.fromJson(x))),
+        peso: json["peso"],
+        vacinas: null != json["vacinas"]
+            ? List<Vacina>.from(json["vacinas"].map((x) => Vacina.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {

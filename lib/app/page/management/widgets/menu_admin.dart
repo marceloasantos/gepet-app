@@ -33,7 +33,7 @@ class MenuAdmin extends GetView<ManagementController> {
                 Text(
                   controller.authorization.value == Constants.ADMIN
                       ? "Administrador"
-                      : "Usuario",
+                      : "Usuário",
                   style: GoogleFonts.montserrat(color: AppColors.grayDark),
                 ),
               ],

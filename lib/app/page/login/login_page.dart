@@ -34,7 +34,7 @@ class LoginPage extends GetView<LoginController> {
             Container(
                 width: Get.width * 0.2,
                 child: InputText(
-                  hintText: "E-mail",
+                  hintText: "Usuário",
                   isPassword: false,
                   controller: controller.emailTEC,
                 )),

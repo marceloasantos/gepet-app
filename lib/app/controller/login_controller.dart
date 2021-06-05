@@ -19,6 +19,7 @@ class LoginController extends GetxController {
     result.then((value) {
       var usuario = UsuarioModel.fromJson(value?.data);
       prefs.setString("token", usuario.token!);
+      prefs.setString("nome", usuario.email!);
       prefs.setString("autorizacao", usuario.autorizacao!);
 
       Get.toNamed(Routes.MANAGEMENT);

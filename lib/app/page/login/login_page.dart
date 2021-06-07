@@ -50,11 +50,14 @@ class LoginPage extends GetView<LoginController> {
             SizedBox(height: Get.height * 0.05),
             Container(
               width: Get.width * 0.2,
-              child: ButtonText(
-                text: "Acessar",
-                backgroundColor: AppColors.brownDark,
-                textColor: Colors.white,
-                onPressed: () => controller.login(),
+              child: Obx(
+                () => ButtonText(
+                  text: "Acessar",
+                  backgroundColor: AppColors.brownDark,
+                  textColor: Colors.white,
+                  isLoading: controller.loading.value,
+                  onPressed: () => controller.login(),
+                ),
               ),
             )
           ],

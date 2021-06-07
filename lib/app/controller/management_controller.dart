@@ -14,13 +14,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ManagementController extends GetxController {
   final ManagementRepository _repository;
+  final userSearchTEC = TextEditingController();
 
   var usuario = Rxn<UsuarioModel>();
   var authorization = "".obs;
   var selectedMenu = 5.obs;
   var userList = [].obs;
+  var filteredUserList = [].obs;
   var vaxList = [].obs;
   var petList = [].obs;
+  var loading = false.obs;
 
   ManagementController(this._repository);
 
@@ -48,6 +51,7 @@ class ManagementController extends GetxController {
   }
 
   listUsers() {
+    loading(true);
     var result = _repository.listUsers();
 
     result.then(
@@ -55,8 +59,10 @@ class ManagementController extends GetxController {
         var usuarios =
             value?.data.map((x) => UsuarioModel.fromJson(x)).toList();
         userList.value = usuarios;
+        filteredUserList.value = usuarios;
       },
     );
+    loading(false);
   }
 
   listVax() {
@@ -125,5 +131,15 @@ class ManagementController extends GetxController {
   Future<Widget> renderMenu() async {
     await getAuthorization();
     return authorization.value == "ROLE_ADMIN" ? MenuAdmin() : MenuUser();
+  }
+
+  filterUsers(String filter) {
+    if (filter == "") {
+      filteredUserList.value = userList.value;
+    } else {
+      filteredUserList.value = userList.value
+          .where((element) => element.nome!.contains(filter))
+          .toList();
+    }
   }
 }

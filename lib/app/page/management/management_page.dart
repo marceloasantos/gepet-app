@@ -4,6 +4,7 @@ import 'package:gepet_app/app/controller/management_controller.dart';
 import 'package:gepet_app/app/page/management/widgets/pets_list.dart';
 import 'package:gepet_app/app/page/management/widgets/users_list.dart';
 import 'package:gepet_app/app/page/management/widgets/vax_list.dart';
+import 'package:gepet_app/app/routes/app_pages.dart';
 import 'package:gepet_app/app/theme/app_colors.dart';
 import 'package:gepet_app/app/utils/constants.dart';
 import 'package:gepet_app/app/widgets/button_text.dart';
@@ -12,7 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ManagementPage extends GetView<ManagementController> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext ctx) {
     return Scaffold(
         body: Column(
           children: [
@@ -56,33 +57,40 @@ class ManagementPage extends GetView<ManagementController> {
                     height: Get.height * 0.8,
                     child: GetX<ManagementController>(
                       builder: (context) {
-                        if (context.authorization.value == Constants.ADMIN) {
-                          switch (context.selectedMenu.value) {
-                            case 0:
-                              return UsersList();
-                            case 1:
-                              return VaxList();
-                            default:
-                              return Center(
-                                child: Text(
-                                  "🐶 Bem vindo(a) ao GePet! 🐱",
-                                  style: GoogleFonts.montserrat(fontSize: 24),
-                                ),
-                              );
-                          }
+                        if (context.loading.value) {
+                          return Center(
+                            child:
+                                SpinKitThreeBounce(color: AppColors.brownDark),
+                          );
                         } else {
-                          switch (context.selectedMenu.value) {
-                            case 0:
-                              return PetsList();
-                            case 1:
-                              return VaxList();
-                            default:
-                              return Center(
-                                child: Text(
-                                  "🐶 Bem vindo(a) ao GePet! 🐱",
-                                  style: GoogleFonts.montserrat(fontSize: 24),
-                                ),
-                              );
+                          if (context.authorization.value == Constants.ADMIN) {
+                            switch (context.selectedMenu.value) {
+                              case 0:
+                                return UsersList();
+                              case 1:
+                                return VaxList();
+                              default:
+                                return Center(
+                                  child: Text(
+                                    "🐶 Bem vindo(a) ao GePet! 🐱",
+                                    style: GoogleFonts.montserrat(fontSize: 24),
+                                  ),
+                                );
+                            }
+                          } else {
+                            switch (context.selectedMenu.value) {
+                              case 0:
+                                return PetsList();
+                              case 1:
+                                return VaxList();
+                              default:
+                                return Center(
+                                  child: Text(
+                                    "🐶 Bem vindo(a) ao GePet! 🐱",
+                                    style: GoogleFonts.montserrat(fontSize: 24),
+                                  ),
+                                );
+                            }
                           }
                         }
                       },
@@ -104,7 +112,13 @@ class ManagementPage extends GetView<ManagementController> {
                       text: "Adicionar 👥",
                       backgroundColor: AppColors.brownDark,
                       textColor: Colors.white,
-                      onPressed: () {},
+                      onPressed: () =>
+                          Get.toNamed(Routes.CREATE_USER)?.whenComplete(
+                        () => Future.delayed(
+                          Duration(seconds: 2),
+                          context.selectMenuItem(0),
+                        ),
+                      ),
                     ),
                   );
                 case 1:
